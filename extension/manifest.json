@@ -1,0 +1,10 @@
+{
+    "manifest_version": 2,
+    "name": "Blog topic",
+    "description": "This extension shows a blog response",
+    "version": "1.0",
+    "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+    }
+    }
