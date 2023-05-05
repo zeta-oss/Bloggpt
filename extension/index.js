@@ -43,8 +43,8 @@ function showdata() {
    //  jQuery("#blog").attr("src",`http://localhost:8081/blog/${topic}`);
      //jQuery("#summ").attr("src",`http://localhost:8081/blogsummary?topic=${topic}`);
 
-     document.querySelector("#blog").setAttribute("src",`http://localhost:8081/blog/${topic}`);
-     document.querySelector("#summ").setAttribute("src",`http://localhost:8081/blogsummary?topic=${topic}`);
+     document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/blog/${topic}`);
+     document.querySelector("#summ").setAttribute("src",`https://blog-gpt-agtg.onrender.com/blogsummary?topic=${topic}`);
     
      
 } 
