@@ -85,7 +85,16 @@
             </div>
             <div class="container-fluid col-lg-6 left">
                 <div id="execute" class="panel center d-flex justify-content-center" ><button class="btn bg-dark" style="background-color: black;color:white;">Execute |></button></div>
-                <br/><br/> <textarea  rows="20" cols="42" id="prompt" placeholder="Provide the keywords here with role and emotion" class="text-primary"></textarea> 
+                <br/>
+                <select id="tone" class="form-input">
+                    <option value="">Choose your Emotion</option>
+                    <option value="neutral">Neutral</option>
+                    <option value="friend">Friendly</option>
+                    <option value="proff">Proffesional</option>
+                    <option value="witty">Witty</option>
+                   
+                </select>
+                <br/> <textarea  rows="20" cols="42" id="prompt" placeholder="Provide the keywords here with role and emotion" class="text-primary"></textarea> 
 
             </div>
             <div class="container-fluid col-lg-6 right">
@@ -156,7 +165,7 @@
     <script>
         window.onload=()=>{
             jQuery("#execute").on("click",()=>{
-                let topic=jQuery("#prompt").val();
+                let topic=jQuery("#prompt").val()+" with an emotion of "+jQuery("#tone").val();
                 console.log(topic);
                 jQuery("#summgen").on("click",()=>{
                     document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/blogsummary?topic=${topic}`);           
