@@ -210,9 +210,9 @@
                 console.log(topic);
                 jQuery("#summgen").on("click",()=>{
                     
-                    document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/loading`);   
+                    document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/loading`);   
                     setTimeout(()=>{
-                        document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/blogsummary?topic=${topic}`)
+                        document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/blogsummary?topic=${topic}`)
                     },48000);        
 
                 });
@@ -221,9 +221,9 @@
 
                 jQuery("#bloggen").on("click",()=>{
                     
-                    document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/loading`);
+                    document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/loading`);
                     setTimeout(()=>{
-                        document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/blog/${topic}?reaction=${reaction}&confl=${checked1}&blogin=${checked2}`)
+                        document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/blog/${topic}?reaction=${reaction}&confl=${checked1}&blogin=${checked2}`)
                     },48000);
                 });
             });
