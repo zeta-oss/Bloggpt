@@ -29,12 +29,14 @@
         fill: cyan;
         color: rgb(238, 28, 133);
     }
+    
 </style>
 </head>
 
 <body>
     <div  style="background-color:rgb(245, 238, 238);overflow-y: auto;border-radius:30px;box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;" class="wrapper container">
     <div class="container-fluid">
+
 
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark mb-4">
@@ -97,7 +99,19 @@
                 </div>
             </div>
             <div class="container-fluid col-lg-6 left">
-                <div id="execute" class="panel center d-flex justify-content-center" ><button class="resltb btn bg-dark" style="background-color: black;color:white;">Execute |></button></div>
+                <div class="panel ml-2">
+                <input type="checkbox" class="form-check-input" id="blogin">
+                         <label class="form-check-label"><b>Generate Blog on Blogin</b></label>
+                        <br/>
+                      
+                        <input type="checkbox" class="form-check-input" id="confluence" checked> 
+                        <label class="form-check-label"><b>Generate Blog on Confluence</b></label>
+                    </div>
+                <div id="execute" class="panel center d-flex justify-content-center" >
+                    
+                        
+                      
+                      <button class="resltb btn bg-dark" style="background-color: black;color:white;">Execute |></button></div>
                 <br/>
                 <select id="tone" style="border-radius: 80px;" class="form-input">
                     <option value="">Choose your Emotion</option>
@@ -112,6 +126,8 @@
                 <br/><br/>
                 <label for="range">Penalize Random and experience: </label>&nbsp<input type="range" id="vol" min="1" max="50" value="10" class="slider"/>
                 <label class="advertise" style="color:darkred;" role="gptpenalty"><b>Hints: </b>Let's <del>ChatGPT</del> you try to penalize the model <br/> with higher value higher penalty for improving experience.</label>
+                
+                    
             </div>
             <div class="container-fluid  right">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -200,11 +216,14 @@
                     },48000);        
 
                 });
+                const checked1=document.getElementById("blogin").checked;
+                const checked2=document.getElementById("confluence").checked;
+
                 jQuery("#bloggen").on("click",()=>{
                     
                     document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/loading`);
                     setTimeout(()=>{
-                        document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/blog/${topic}?reaction=${reaction}`)
+                        document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/blog/${topic}?reaction=${reaction}&confl=${checked1}&blogin=${checked2}`)
                     },48000);
                 });
             });
