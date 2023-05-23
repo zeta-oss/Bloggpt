@@ -165,6 +165,7 @@
                     <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span>
                         <textarea class="form-control ml-1 shadow-none textarea" style="resize:none;" id="comments"></textarea></div>
                         <p><button class="resltb btn btn-success">Feedback</button></p>
+                        &nbsp; &nbsp;<span class="wrapper p-2"><label for="mwlen">Maximum size of blog: </label> <input type="number" min="1000" max="3500" class="form-control ml-1 shadow-none" id="mwlen"/></span>
                     </div>
                   </div>
             </div>
@@ -210,20 +211,24 @@
                 console.log(topic);
                 jQuery("#summgen").on("click",()=>{
                     
-                    document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/loading`);   
+                    document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/loading`);   
                     setTimeout(()=>{
-                        document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/blogsummary?topic=${topic}`)
+                        document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/blogsummary?topic=${topic}`)
                     },48000);        
 
                 });
                 const checked1=document.getElementById("blogin").checked;
                 const checked2=document.getElementById("confluence").checked;
+                const lengthw=jQuery("#mwlen").val();
+
+                console.log(`Length expected: ${lengthw}`);
+
 
                 jQuery("#bloggen").on("click",()=>{
                     
-                    document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/loading`);
+                    document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/loading`);
                     setTimeout(()=>{
-                        document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/blog/${topic}?reaction=${reaction}&confl=${checked1}&blogin=${checked2}`)
+                        document.querySelector("#blog").setAttribute("src",`http://127.0.0.1:8081/blog/${topic}?reaction=${reaction}&confl=${checked1}&blogin=${checked2}&mlength=${lengthw}`)
                     },48000);
                 });
             });
