@@ -207,6 +207,7 @@
         window.onload=()=>{
             jQuery(".resltb").on("click",()=>{
                 let topic=jQuery("#prompt").val()+" with an emotion of "+jQuery("#tone").val()+" and an example can be "+jQuery("#example").val();
+                topic=topic.replace(/\//g,' or ');
                 let reaction=jQuery("#comments").val();
                 console.log(topic);
                 jQuery("#summgen").on("click",()=>{
