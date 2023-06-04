@@ -5,12 +5,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>Zeta BlogGPT</title>
 
 <style>
+    body {
+        background: radial-gradient(rgba(111, 111, 111, 1), rgba(0, 0, 0, 1));
+      height: 100vh;
+      width: 100vw;
+    }
     @keyframes advert {
         from {opacity: 2.0;}
         to {opacity: 0.2;}
@@ -29,133 +36,505 @@
         fill: cyan;
         color: rgb(238, 28, 133);
     }
-    
+  
+      .slider-title {
+        position: relative;
+        font-size: 2em;
+        color: white;
+        text-align: center;
+        top: 100px;
+      }
+  
+      #slider {
+        left: 10vw;
+        width: 80vw;
+        top: 200px;
+        margin-bottom: 1em;
+        height: 40px;
+        position: relative;
+        background: linear-gradient(to right, green, yellow 70%, red);
+      }
+  
+      #slider #handle {
+        height: 75px;
+        transform: translatey(-15px);
+      }
+  
+      .slider-endpoints {
+        margin-top: 20px;
+        font-size: 2em;
+        color: white;
+      }
+  
+      .handle-text {
+        pointer-events: none;
+        user-select: none;
+        position: absolute;
+        width: 100%;
+        color: white;
+        text-align: center;
+        top: 80px;
+        transform: translateX(-5px);
+      }
+  
+      .slider-endpoints {
+        position: absolute;
+        width: 100%;
+        top: 2em;
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .ui-slider-handle {
+        position: absolute;
+        z-index: 2;
+        width: 20px;
+        height: 100px;
+        cursor: default;
+      }
+  
+      #remaining-tokens {
+        font-size: 1.3em;
+        color: lightgreen;
+        text-indent: 5px;
+      }
+  
+      #tokens-section1 {
+        font-size: 1.3em;
+        color: lightgreen;
+        text-indent: 5px;
+      }
+  
+      #tokens-section2 {
+        font-size: 1.3em;
+        color: lightgreen;
+        text-indent: 5px;
+      }
+  
+      #tokens-section3 {
+        font-size: 1.3em;
+        color: lightgreen;
+        text-indent: 5px;
+      }
+  
+      #tokens-section4 {
+        font-size: 1.3em;
+        color: lightgreen;
+        text-indent: 5px;
+      }
+  
+      #section-titles {
+        background: transparent;
+        display: grid;
+        left: 10vw;
+        width: 80vw;
+        top: 150px;
+        grid-row: 1fr;
+        color: white;
+        margin-bottom: 1em;
+        height: 40px;
+        position: relative;
+      }
+  
+      #section-titles>div {
+        border-top: 1px solid white;
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 5px;
+      }
+     
+.welcome .splash {
+    height: 0px;
+    padding: 0px;
+    border: 130em solid #039be5;
+    position: fixed;
+    left: 50%;
+    top: 100%;
+    display: block;
+    box-sizing: initial;
+    overflow: hidden;
+  
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: puff 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
+  }
+
+@keyframes puff {
+    0% {
+      top: 100%;
+      height: 0px;
+      padding: 0px;
+    }
+    100% {
+      top: 50%;
+      height: 100%;
+      padding: 0px 100%;
+    }
+  }
 </style>
 </head>
 
 <body>
-    <div  style="background-color:rgb(245, 238, 238);overflow-y: auto;border-radius:30px;box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;" class="wrapper container">
-    <div class="container-fluid">
-
-
-        <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark mb-4">
-                <a style="color: white;" class="d-flex justify-content-center advertise" data-bs-toggle="modal" data-bs-target="#mymodal"><b>Check the chrome extension here</b></a>
-
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
-                    </a>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Generate</span> Blog </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Generate</span> PPT </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Images and Videos</span></a>
-                        </li>
-                        <li>
-                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-                                <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Open</span>Confluence</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Open</span> Blogin</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Open</span> Google Slides</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <hr>
-                    <div class="dropdown pb-4">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">Preeti</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                        </ul>
-                    </div>
+    <span id="splash-overlay" class="splash"></span>
+  <span id="welcome" class="z-depth-4"></span>
+ 
+   
+                <style>
+                                    .slider-title {
+                    position: relative;
+                    font-size: 2em;
+                    color: white;
+                    text-align: center;
+                    top: 100px;
+                  }
+              
+                  #slider {
+                    left: 10vw;
+                    width: 80vw;
+                    top: 200px;
+                    margin-bottom: 1em;
+                    height: 40px;
+                    position: relative;
+                    background: linear-gradient(to right, green, yellow 70%, red);
+                  }
+              
+                  #slider #handle {
+                    height: 75px;
+                    transform: translatey(-15px);
+                  }
+              
+                  .slider-endpoints {
+                    margin-top: 20px;
+                    font-size: 2em;
+                    color: white;
+                  }
+              
+                  .handle-text {
+                    pointer-events: none;
+                    user-select: none;
+                    position: absolute;
+                    width: 100%;
+                    color: white;
+                    text-align: center;
+                    top: 80px;
+                    transform: translateX(-5px);
+                  }
+              
+                  .slider-endpoints {
+                    position: absolute;
+                    width: 100%;
+                    top: 2em;
+                    display: flex;
+                    justify-content: space-between;
+                  }
+              
+                  .ui-slider-handle {
+                    position: absolute;
+                    z-index: 2;
+                    width: 20px;
+                    height: 100px;
+                    cursor: default;
+                  }
+              
+                  #remaining-tokens {
+                    font-size: 1.3em;
+                    color: lightgreen;
+                    text-indent: 5px;
+                  }
+              
+                  #tokens-section1 {
+                    font-size: 1.3em;
+                    color: lightgreen;
+                    text-indent: 5px;
+                  }
+              
+                  #tokens-section2 {
+                    font-size: 1.3em;
+                    color: lightgreen;
+                    text-indent: 5px;
+                  }
+              
+                  #tokens-section3 {
+                    font-size: 1.3em;
+                    color: lightgreen;
+                    text-indent: 5px;
+                  }
+              
+                  #tokens-section4 {
+                    font-size: 1.3em;
+                    color: lightgreen;
+                    text-indent: 5px;
+                  }
+              
+                  #section-titles {
+                    background: transparent;
+                    display: grid;
+                    left: 10vw;
+                    width: 80vw;
+                    top: 150px;
+                    grid-row: 1fr;
+                    color: white;
+                    margin-bottom: 1em;
+                    height: 40px;
+                    position: relative;
+                  }
+              
+                  #section-titles>div {
+                    border-top: 1px solid white;
+                    border-left: 1px solid white;
+                    border-right: 1px solid white;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    padding: 5px;
+                  }
+                </style>
+              
+                <div class="slider-title">BlogGPT Zeta</div>
+                <div id="section-titles">
+                  <div id="section1">Role Description <span id="tokens-section1"></span></div>
+                  <div id="section2">Example Dialogue <span id="tokens-section2"></span></div>
+                  <div id="section3">Context <span id="tokens-section3"></span></div>
+                  <div id="section4">User (Message) Prompt <span id="tokens-section4"></span></div>
+                  <div id="section5">AI (Response) New Generation Tokens <span id="remaining-tokens"></span></div>
                 </div>
-            </div>
-            <div class="container-fluid col-lg-6 left">
-                <div class="panel ml-2">
-                <input type="checkbox" class="form-check-input" id="blogin">
-                         <label class="form-check-label"><b>Generate Blog on Blogin</b></label>
-                        <br/>
-                      
-                        <input type="checkbox" class="form-check-input" id="confluence" checked> 
-                        <label class="form-check-label"><b>Generate Blog on Confluence</b></label>
-                    </div>
-                <div id="execute" class="panel center d-flex justify-content-center" >
+                <div id="slider">
+                  <div class="ui-slider-handle" id="handle">
+                    <div class="handle-text handle-text1"></div>
+                  </div>
+                  <div class="ui-slider-handle" id="handle">
+                    <div class="handle-text handle-text2"></div>
+                  </div>
+                  <div class="ui-slider-handle" id="handle">
+                    <div class="handle-text handle-text3"></div>
+                  </div>
+                  <div class="ui-slider-handle" id="handle">
+                    <div class="handle-text handle-text4"></div>
+                  </div>
+                  <div class="slider-endpoints">
+                    <div>0</div>
+                    <div>2048</div>
+                  </div>
+                </div>
+                <script>
+                  $(function() {
+                    var handle1 = $(".handle-text1");
+                    var handle2 = $(".handle-text2");
+                    var handle3 = $(".handle-text3");
+                    var handle4 = $(".handle-text4");
+                    document.getElementById("wc").innerHTML=jQuery(".handle-text4").text();
+                    console.log(jQuery(".handle-text4").text());
+
+                    var sections = $('#section-titles');
+                    var totalTokens = 2048;
+              
+                    function calculateSectionWidths() {
+                      var max = $("#slider").slider("option", "max");
+                      var values = $("#slider").slider("option", "values");
+                      var width1 = values[0] / max * 100;
+                      var width2 = (values[1] - values[0]) / max * 100;
+                      var width3 = (values[2] - values[1]) / max * 100;
+                      var width4 = (values[3] - values[2]) / max * 100;
+                      var width5 = (max - values[3]) / max * 100;
+                      sections.css('grid-template-columns', `${width1}% ${width2}% ${width3}% ${width4}% ${width5}%`);
+                    }
+              
+                    function updateRemainingTokens() {
+                      var lastHandleValue = $("#slider").slider("option", "values")[3];
+                      var remaining = totalTokens - lastHandleValue;
+                      $('#remaining-tokens').text(remaining);
+                    }
+              
+                    function updateSectionTokens(ui) {
+                      $('#tokens-section1').text(ui.values[0]);
+                      $('#tokens-section2').text(ui.values[1] - ui.values[0]);
+                      $('#tokens-section3').text(ui.values[2] - ui.values[1]);
+                      $('#tokens-section4').text(ui.values[3] - ui.values[2]);
+                    }
+                    $("#slider").slider({
+                      min: 0,
+                      max: 2048,
+                      values: [300, 600, 1000, 1500],
+                      create: function() {
+                        handle1.text($(this).slider("values", 0));
+                        handle2.text($(this).slider("values", 1));
+                        handle3.text($(this).slider("values", 2));
+                        handle4.text($(this).slider("values", 3));
+                        $("#textarea12").text($(this).slider("values", 3));
+                        var initialUi = {
+                          values: $(this).slider("option", "values")
+                        };
+                        calculateSectionWidths();
+                        updateRemainingTokens();
+                        updateSectionTokens(initialUi);
+                      },
+                      slide: function(event, ui) {
+                        handle1.text(ui.values[0]);
+                        handle2.text(ui.values[1]);
+                        handle3.text(ui.values[2]);
+                        handle4.text(ui.values[3]);
+                        $("#textarea12").text($(this).slider("values", 3));
+                        calculateSectionWidths();
+                        updateRemainingTokens();
+                        updateSectionTokens(ui);
+                      },
+                      change: function(event, ui) {
+                        calculateSectionWidths();
+                        updateGradient();
+                        updateSectionTokens(ui);
+                      }
+                    });
+              
+                    function updateGradient() {
+                      var max = $("#slider").slider("option", "max");
+                      var values = $("#slider").slider("option", "values");
+                      var percentage1 = (values[0] / max) * 100;
+                      var percentage2 = ((values[1] - values[0]) / max) * 100;
+                      var percentage3 = ((values[2] - values[1]) / max) * 100;
+                      var percentage4 = ((values[3] - values[2]) / max) * 100;
+                      $("#slider").css(
+                        "background",
+                        "linear-gradient(to right, green " +
+                        percentage1 +
+                        "%, yellow " +
+                        (percentage1 + percentage2) +
+                        "%, orange " +
+                        (percentage1 + percentage2 + percentage3) +
+                        "%, red " +
+                        (percentage1 + percentage2 + percentage3 + percentage4) +
+                        "%)"
+                      );
+                    }
+                    calculateSectionWidths();
+                    updateGradient();
+                  });
+                </script>
+              
+                <style>
+                  #textareas {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-top: 350px;
+                  }
+              
+                  .textarea-section {
+                    width: 80vw;
+                    margin-bottom: 20px;
+                  }
+              
+                  .textarea-section>textarea {
+                    width: 100%;
+                    background: linear-gradient(rgba(11, 11, 11, 1), rgba(0, 0, 0, 1));
+                    color: white;
+                  }
+              
+                  .textarea-title {
+                    color: white;
+                    font-size: 1.5em;
+                    margin-bottom: 10px;
+                  }
+                </style>
+              
+                <div id="textareas">
+                  <div class="textarea-section">
+                    <div class="textarea-title">Section 1: Role Description</div>
+                    <textarea id="role" rows="4"></textarea>
+                  </div>
+                  <div class="textarea-section">
+                    <div class="textarea-title">Section 2: Word Count Expected</div>
+                    <textarea  id="wc" rows="4"></textarea>
+                  </div>
+                  <div class="textarea-section">
+                    <div class="textarea-title">Section 3: Contex Description</div>
+                    <textarea id="cd" placeholder="Blog | Q/A | Tech-blog | Story" rows="4"></textarea>
+                  </div>
+                  <div class="textarea-section">
+                    <div class="textarea-title">Section 4: Example Dialogue</div>
+                    <textarea id="example" rows="4"></textarea>
+                  </div>
+                  <div class="textarea-section">
+                    <div class="textarea-title">Section 5: Emotional Summaries</div>
+                    <textarea id="emotion" placeholder="Friendly | Neutral | Proffesional | Witty" rows="4"></textarea>
+                  </div>
+                  <div class="textarea-section">
+                    <div class="textarea-title">Section 6: User Prompt</div>
+                    <textarea id="prompt" rows="4"></textarea>
+                  </div>
+                  <div class="textarea-section">
+                    <div class="textarea-title">Section 7: Integrate Search Optimization on the generated content</div>
+                    <textarea id="seo" rows="4">Yes</textarea>
+                  </div>
+                  <button class="resltb btn btn-success" style="background-color: black;color:white;"><i class="d-none loader fa fa-circle-o-notch fa-spin"></i>Test and Train</button>
+
+                </div>
+              
+                <script>
+                  $(function() {
+                    var textareas = ["#textarea1", "#textarea2", "#textarea3", "#textarea4"];
+                    textareas.forEach(function(id, index) {
+                      $(id).on("input", function() {
+                        var text = $(this).val().trim();
+                        var wordCount = text.length > 0 ? text.split(/\s+/).length : 0;
+                        var slider = $("#slider");
+                        var values = slider.slider("values");
+                        // Ensure the total doesn't exceed the max
+                        var newTotal = values.slice(0, index).reduce((a, b) => a + b, 0) + wordCount;
+                        var max = slider.slider("option", "max");
+                        if (newTotal > max) {
+                          wordCount = max - values.slice(0, index).reduce((a, b) => a + b, 0);
+                          if (wordCount < 0) wordCount = 0;
+                        }
+                        // Update the corresponding slider handle
+                        values[index] = wordCount;
+                        slider.slider("values", values);
+                        slider.slider("option", "slide").call(slider, null, {
+                          values: values
+                        });
+                      });
+                    });
+                  });
+                </script>
+          </div>
+
+        </div>
                     
-                        
-                      
-                      <button class="resltb btn bg-dark" style="background-color: black;color:white;">Execute |></button></div>
-                <br/>
-                <select id="tone" style="border-radius: 80px;" class="form-input">
-                    <option value="">Choose your Emotion</option>
-                    <option value="neutral">Neutral</option>
-                    <option value="friend">Friendly</option>
-                    <option value="prof">Professional</option> 
-                    <option value="witty">Witty</option>
-                   
-                </select>
-                &nbsp; <input type="text" id="example" placeholder="Provide an example" class="form-input"/>
-                <br/> <textarea  rows="20" cols="42" id="prompt" placeholder="Provide the keywords here with role and emotion" class="text-primary"></textarea> 
-                <br/><br/>
-                <label for="range">Penalize Random and experience: </label>&nbsp<input type="range" id="vol" min="1" max="50" value="10" class="slider"/>
-                <label class="advertise" style="color:darkred;" role="gptpenalty"><b>Hints: </b>Let's <del>ChatGPT</del> you try to penalize the model <br/> with higher value higher penalty for improving experience.</label>
-                
-                    
             </div>
-            <div class="container-fluid  right">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid gpt right d-none">
+                <nav class="navbar navbar-expand-lg navbar-light bg-dark">
                     <div class="container-fluid">
-                      <a id="summgen" class="nav-link">Generate Summary</a>
+                      <a id="summgen" class="bg-secondary nav-link">View Summary</a>
                       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                       </button>
                       <div class="collapse navbar-collapse" id="navbarText">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                           <li class="nav-item">
-                            <a id="bloggen" class="nav-link" aria-current="page">Generate Blogs</a>
+                            <a id="bloggen" class="nav-link bg-danger" style="color:white;" aria-current="page">View Blogs</a>
                           </li>
                           <li class="nav-item">
-                            <a id="pptgen" class="nav-link" href="https://github.com/zeta-oss/Bloggpt-backend/raw/main/pptgpt.pptx" download>Generate PPTS</a>
+                            <a id="pptgen" class="nav-link bg-success" style="color:white;"  href="https://github.com/zeta-oss/Bloggpt-backend/raw/main/pptgpt.pptx" download>View PPT</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="https://github.com/zeta-oss/Bloggpt-backend/raw/main/final_video.mp4">Generate Videos</a>
+                            <a class="nav-link bg-warning" style="color: white;" href="https://github.com/zeta-oss/Bloggpt-backend/raw/main/final_video.mp4">View Video</a>
                           </li>
                         </ul>
                       </div>
                     </div>
                   </nav>
                   
-                  <div class="container container-fluid" style="border: 4px solid black;">
+                  <div class="container container-fluid" style="background:radial-gradient( rgba(0, 0, 0, 1),rgb(224, 220, 185));border: 4px solid rgba(245, 231, 231, 0.959);border-top-left-radius:5%;">
                     
                     <p style="color:white;" class="position-absolute  translate-middle badge rounded-pill bg-danger">Execute and get Output</p>
                     <iframe src=""  id="blog"  width="100%" height="500px"></iframe>
+                    <div style="border-top: 2px solid black;">
                     <span class="fa"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
                         <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
                       </svg> Like</span>&nbsp;<span class="fa"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down" viewBox="0 0 16 16">
@@ -165,8 +544,8 @@
                     <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span>
                         <textarea class="form-control ml-1 shadow-none textarea" style="resize:none;" id="comments"></textarea></div>
                         <p><button class="resltb btn btn-success">Feedback</button></p>
-                        &nbsp; &nbsp;<span class="wrapper p-2"><label for="mwlen">Maximum size of blog: </label> <input type="number" min="500" max="3500" class="form-control ml-1 shadow-none" id="mwlen"/></span>
-                    </div>
+                        &nbsp; &nbsp;</div>
+                      </div>
                   </div>
             </div>
             <div class="modal" id="myModal">
@@ -205,8 +584,27 @@
     </div>
     <script>
         window.onload=()=>{
+          
+          document.getElementById("wc").innerHTML=jQuery(".handle-text4").text();
+          console.log(jQuery(".handle-text4").text());
             jQuery(".resltb").on("click",()=>{
-                let topic=jQuery("#prompt").val()+" with an emotion of "+jQuery("#tone").val()+" and an example can be "+jQuery("#example").val();
+                const seo=jQuery("#seo").val();
+                const role=jQuery("#role").val();
+                
+                const wc=jQuery("#wc").val();
+                
+                const prompt=jQuery("#prompt").val();
+                const cd=jQuery("#cd").val();
+                const example=jQuery("#example").val();
+                const emotion=jQuery("#emotion").val();
+                console.log(cd,emotion);
+                
+                jQuery("body").html(`${document.querySelector(".gpt").innerHTML}`);
+                let topic="";
+                if(seo.toLowerCase()=="no") 
+                topic=prompt+" with an emotion of "+emotion+" and an example taken can be "+example;
+                else 
+                topic=prompt+" Write as a proffesional search engine optimiser";
                 topic=topic.replace(/\//g,' or ');
                 let reaction=jQuery("#comments").val();
                 console.log(topic);
@@ -218,23 +616,19 @@
                     },48000);        
 
                 });
-                const checked1=document.getElementById("blogin").checked;
-                const checked2=document.getElementById("confluence").checked;
+                const checked1=true;
+                const checked2=true;
                 const lengthw=jQuery("#mwlen").val();
-
                 console.log(`Length expected: ${lengthw}`);
-
-
                 jQuery("#bloggen").on("click",()=>{
-                    
+                    console.log( document.querySelector("#blog").getAttribute("src"));
                     document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/loading`);
                     setTimeout(()=>{
-                        document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/blog/${topic}?reaction=${reaction}&confl=${checked1}&blogin=${checked2}&mlength=${lengthw}`)
+                        document.querySelector("#blog").setAttribute("src",`https://blog-gpt-agtg.onrender.com/blog/${topic}?reaction=${reaction}&confl=${checked1}&blogin=${checked2}&mlength=${wc}&seo=${seo}`)
                     },48000);
                 });
             });
         };  
         
     </script>
-   </div>
 </body>
